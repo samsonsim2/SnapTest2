@@ -38,7 +38,7 @@ function App() {
         justifyContent: 'center', 
        
       }}><button onClick={handleClick}>
-  Go to Example
+  Go Back
 </button>
  </div> 
 <div ref={canvasContainerRef}></div>;
