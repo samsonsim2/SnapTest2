@@ -16,7 +16,7 @@ function App() {
     });
 
     session.setSource(source);
-    session.applyLens(lenses[0]);
+    session.applyLens(lenses[12]);
     session.play('live');
   }, [session, lenses]);
 
@@ -27,8 +27,23 @@ function App() {
   useEffect(() => {
     canvasContainerRef?.current?.replaceWith(session.output.live);
   }, [session]);
-
-  return <div ref={canvasContainerRef}></div>;
+  const handleClick = () => {
+    window.location.href = 'https://ar-trail.vercel.app/'; 
+  };
+  return <>
+  <div style={{ 
+        display: 'flex', 
+        flexDirection: 'column', 
+        alignItems: 'center', 
+        justifyContent: 'center', 
+       
+      }}><button onClick={handleClick}>
+  Go to Example
+</button>
+ </div> 
+<div ref={canvasContainerRef}></div>;
+  
+  </>
 }
 
 export default App;
