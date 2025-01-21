@@ -16,7 +16,7 @@ function App() {
     });
 
     const source = createMediaStreamSource(mediaStream, {
-      transform: Transform2D.MirrorX,
+      // transform: Transform2D.MirrorX,
       cameraType:"environment"
     });
 
