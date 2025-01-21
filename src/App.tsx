@@ -21,7 +21,7 @@ function App() {
     });
 
     session.setSource(source);
-    session.applyLens(lenses[1]);
+    session.applyLens(lenses[0]);
     session.play("live");
     
   }, [session, lenses]);
