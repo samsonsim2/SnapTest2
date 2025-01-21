@@ -1,25 +1,13 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
-import { useCameraKit } from './hooks/useCameraKit';
-import { createMediaStreamSource, Transform2D } from '@snap/camera-kit';
- 
+import { useCallback, useEffect, useRef, useState } from "react";
+import { useCameraKit } from "./hooks/useCameraKit";
+import { createMediaStreamSource, Transform2D } from "@snap/camera-kit";
+
 function App() {
   const { session, lenses } = useCameraKit();
   const canvasContainerRef = useRef<HTMLDivElement>(null);
 
-  const [windowSize, setWindowSize] = useState({
-    width: window.innerWidth,
-    height: window.innerHeight,
-  });
-
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowSize({ width: window.innerWidth, height: window.innerHeight });
-    };
-
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
+  
+ 
   const startCameraKit = useCallback(async () => {
     const mediaStream = await navigator.mediaDevices.getUserMedia({
       video: true,
@@ -30,8 +18,9 @@ function App() {
     });
 
     session.setSource(source);
-    session.applyLens(lenses[0]);
-    session.play('live');
+    session.applyLens(lenses[1]);
+    session.play("live");
+    
   }, [session, lenses]);
 
   useEffect(() => {
@@ -41,36 +30,82 @@ function App() {
   useEffect(() => {
     canvasContainerRef?.current?.replaceWith(session.output.live);
   }, [session]);
-  // const handleClick = () => {
-  //   window.location.href = 'https://ar-trail.vercel.app/'; 
-  // };
-  return <>
-  <div style={{ 
-        display: 'flex', 
-        flexDirection: 'column', 
-        alignItems: 'center', 
-        justifyContent: 'center', 
-        width: windowSize.width,
-        height: windowSize.height,
-        overflow: "hidden",
-      
+  //audio
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  const playAudio = () => {
+    if (audioRef.current) {
+      audioRef.current.play();
+    }
+  };
+
+  const navigateToUrl = () => {
+    window.location.href = "https://ar-trail.vercel.app";
+  };
+
+  return (
+    <>
+      <audio ref={audioRef}>
+        <source src="sound.mp3" type="audio/mpeg" />
+        Your browser does not support the audio element.
+      </audio>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          width: "fit-content",
+          height: "fit-content",
+          overflow: "hidden",
+          position: "relative",
+
           border: "2px solid red",
- 
-        margin:'0px',
-        padding:'0px',
-        boxSizing:'border-box'
-       
-      }}>
 
-<div style={{ 
-       width: "100%",
-       height: "100%",
-       objectFit: "cover",
-      }}ref={canvasContainerRef}></div>
- </div> 
+          margin: "auto",
+          padding: "0px",
+          boxSizing: "border-box",
+        }}
+      >
+        <button
+          style={{
+            position: "absolute",
+            top: "10px",
+            left: "10px",
+            margin: "0px",
+            padding: "0px",
+            boxSizing: "border-box",
+          }}
 
-  
-  </>
+          onClick={navigateToUrl}
+        >
+          Go Back
+        </button>
+
+        <button
+          style={{
+            position: "absolute",
+            top: "10px",
+            right: "10px",
+            margin: "0px",
+            padding: "0px",
+            boxSizing: "border-box",
+          }}
+          onClick={playAudio}
+        >
+          Play Audio
+        </button>
+        <div
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+          }}
+          ref={canvasContainerRef}
+        ></div>
+      </div>
+    </>
+  );
 }
 
 export default App;
