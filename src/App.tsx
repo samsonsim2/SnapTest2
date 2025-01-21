@@ -10,11 +10,14 @@ function App() {
  
   const startCameraKit = useCallback(async () => {
     const mediaStream = await navigator.mediaDevices.getUserMedia({
-      video: true,
+      video: {  facingMode:"environment"},
+    
+
     });
 
     const source = createMediaStreamSource(mediaStream, {
       transform: Transform2D.MirrorX,
+      cameraType:"environment"
     });
 
     session.setSource(source);
@@ -66,7 +69,7 @@ function App() {
           padding: "0px",
           boxSizing: "border-box",
         }}
-      >
+     id="flip" >
         <button
           style={{
             position: "absolute",
