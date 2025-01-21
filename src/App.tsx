@@ -85,8 +85,8 @@ function App() {
         <button
           style={{
             position: "absolute",
-            top: "10px",
-            right: "10px",
+            bottom: "10px",
+           left: "10px",
             margin: "0px",
             padding: "0px",
             boxSizing: "border-box",
