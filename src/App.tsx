@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { useCameraKit } from "./hooks/useCameraKit";
 import { createMediaStreamSource, Transform2D } from "@snap/camera-kit";
 
