@@ -1,10 +1,24 @@
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useCameraKit } from './hooks/useCameraKit';
 import { createMediaStreamSource, Transform2D } from '@snap/camera-kit';
-
+import Webcam from "react-webcam";
 function App() {
   const { session, lenses } = useCameraKit();
   const canvasContainerRef = useRef<HTMLDivElement>(null);
+
+  const [windowSize, setWindowSize] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  });
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowSize({ width: window.innerWidth, height: window.innerHeight });
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const startCameraKit = useCallback(async () => {
     const mediaStream = await navigator.mediaDevices.getUserMedia({
@@ -36,12 +50,25 @@ function App() {
         flexDirection: 'column', 
         alignItems: 'center', 
         justifyContent: 'center', 
+        width: windowSize.width,
+        height: windowSize.height,
+        overflow: "hidden",
+      
+          border: "2px solid red",
+ 
+        margin:'0px',
+        padding:'0px',
+        boxSizing:'border-box'
        
-      }}><button onClick={handleClick}>
-  Go Back
-</button>
+      }}>
+
+<div style={{ 
+       width: "100%",
+       height: "100%",
+       objectFit: "cover",
+      }}ref={canvasContainerRef}></div>
  </div> 
-<div ref={canvasContainerRef}></div>;
+
   
   </>
 }
