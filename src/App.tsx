@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef } from "react";
 import { useCameraKit } from "./hooks/useCameraKit";
 // import { createMediaStreamSource, Transform2D } from "@snap/camera-kit";
-import { createMediaStreamSource } from "@snap/camera-kit";
+import { createMediaStreamSource , Transform2D } from "@snap/camera-kit";
 function App() {
   const { session, lenses } = useCameraKit();
   const canvasContainerRef = useRef<HTMLDivElement>(null);
@@ -10,14 +10,15 @@ function App() {
  
   const startCameraKit = useCallback(async () => {
     const mediaStream = await navigator.mediaDevices.getUserMedia({
-      video: {  facingMode:"environment"},
+      // video: {  facingMode:"environment"},
+      video: true,
     
 
     });
 
     const source = createMediaStreamSource(mediaStream, {
-      // transform: Transform2D.MirrorX,
-      cameraType:"environment"
+      transform: Transform2D.MirrorX,
+      // cameraType:"environment"
     });
 
     session.setSource(source);
