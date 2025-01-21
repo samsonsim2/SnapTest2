@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useCameraKit } from './hooks/useCameraKit';
 import { createMediaStreamSource, Transform2D } from '@snap/camera-kit';
-import Webcam from "react-webcam";
+ 
 function App() {
   const { session, lenses } = useCameraKit();
   const canvasContainerRef = useRef<HTMLDivElement>(null);
@@ -41,9 +41,9 @@ function App() {
   useEffect(() => {
     canvasContainerRef?.current?.replaceWith(session.output.live);
   }, [session]);
-  const handleClick = () => {
-    window.location.href = 'https://ar-trail.vercel.app/'; 
-  };
+  // const handleClick = () => {
+  //   window.location.href = 'https://ar-trail.vercel.app/'; 
+  // };
   return <>
   <div style={{ 
         display: 'flex', 
