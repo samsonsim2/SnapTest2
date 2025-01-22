@@ -1,7 +1,7 @@
 import { bootstrapCameraKit, CameraKitSession, Lens } from '@snap/camera-kit';
 import { createContext, useEffect, useRef, useState } from 'react';
 const apiToken = 'eyJhbGciOiJIUzI1NiIsImtpZCI6IkNhbnZhc1MyU0hNQUNQcm9kIiwidHlwIjoiSldUIn0.eyJhdWQiOiJjYW52YXMtY2FudmFzYXBpIiwiaXNzIjoiY2FudmFzLXMyc3Rva2VuIiwibmJmIjoxNzM3Mzc5NDEzLCJzdWIiOiI4MGU5OGNhNS03ZGVlLTRiNmItYTliOC01Mzc2YzE5ZjYzYTJ-U1RBR0lOR34xYjhkYTJiMC0yODFmLTQyNGYtODU2Mi02NWIxZDA4ZDNiM2MifQ.bvka0G7TYEn9wcsQwP_8JlDQSf31l888c37q9LnKKsg';
-const lensGroupId = '6f94913f-d91d-4529-8779-f32b870bdb6a';
+const lensGroupId = '47c19dd5-984e-43ce-9048-b43a8535d2aa';
 
 export interface CameraKitState {
   session: CameraKitSession;
