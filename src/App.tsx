@@ -22,7 +22,7 @@ function App() {
     });
 
     session.setSource(source);
-    session.applyLens(lenses[0]);
+    session.applyLens(lenses[17]);
     session.play("live");
     
   }, [session, lenses]);
